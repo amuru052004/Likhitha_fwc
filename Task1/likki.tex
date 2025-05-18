@@ -1,0 +1,153 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage{titlesec}
+\usepackage{tikz}
+\usepackage{wrapfig}  
+\usepackage[a4paper,top=2.8cm,bottom=0.8cm,left=2.5cm,right=2.5cm]{geometry}
+\usepackage{mathptmx} 
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{titling}
+\usepackage{lipsum}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.8em}
+\setstretch{1.1}
+\definecolor{chapterblue}{RGB}{0,174,239} 
+\definecolor{darkskyblue}{rgb}{0.0, 0.5, 1.0}
+\definecolor{skyblue}{RGB}{135, 206, 235}
+\usepackage{newtxtext,newtxmath}
+\titleformat{\section}
+  {\fontsize{67}{48}\selectfont\bfseries\color{chapterblue}}{\thesection}{1em}{}
+% Title format
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{chapterblue}}{\thesection}{1em}{}
+% Header/Footer settings
+\pagestyle{fancy}
+\cfoot{Reprint 2025-26}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\begin{document}
+\pagestyle{empty} % Start with empty page style
+\thispagestyle{fancy} % Apply fancy style only to the first page 
+\renewcommand{\headrulewidth}{0pt} % Remove header rule
+\fancyhead[L]{% Left header
+        \includegraphics[width=8cm, height=2cm]{img3.png} 
+        }
+\fancyhead[R]{% Right header
+    Name: A.Likhitha \\
+    Batch: COMETFWC019\\
+    Date: 17 may 2025
+}
+\begin{center}
+   \vspace{4em} \includegraphics[width=100]{gMgzI.png} % Replace with your QR image
+\end{center}
+\begin{center}
+\hfill
+\vspace{-4em}
+\begin{tikzpicture}
+    \vspace{-4em}\draw[line width=2pt, draw=cyan ] (0,0) rectangle (3,2);
+     \node at (1.5,1) {\textcolor{black}{\fontsize{60pt}{60pt}\selectfont \textbf{4}}};
+\end{tikzpicture}
+ \vspace{-0.5em}
+\begin{center}
+    {\textcolor{chapterblue}{
+        \textbf{
+               {\fontsize{30}{40}\selectfont Q}{\fontsize{20}{34}\selectfont UADRATIC}
+            {\fontsize{30}{46}\selectfont E}{\fontsize{20}{34}\selectfont QUATIONS}
+             % Pull the line up to sit just under the text
+                       }
+  }
+\end{center}
+\vspace{-2em} % adjust vertical spacing between title and line
+\noindent
+\begin{tikzpicture}
+  \draw[chapterblue, line width=2pt] (0,0) -- (\linewidth,0);
+\end{tikzpicture}
+
+    }} \\
+    \end{center}
+
+\section*{4.1 Introduction}
+\vspace{-1em}
+\begin{document}
+% First 3 lines (no image)
+In Chapter 2, you have studied different types of polynomials. One type was the quadratic polynomial of the form \( ax^2 + bx + c \), \( a \ne 0 \)
+When we equate this polynomial to zero, we get a quadratic equation.
+Quadratic equations come up when we deal with many real-life situations. \\
+
+% Wrap figure starts (image on right, text beside)
+\begin{wrapfigure}{r}{0.4\textwidth}
+    \centering
+    \includegraphics[width=0.95\linewidth]{h.png} % Replace with your image
+    
+\end{wrapfigure}
+\vspace{-2em}
+For instance, suppose a charity trust decides to build a prayer hall having a carpet area of 300 square metres 
+with its length one metre more than twice its breadth. What should be the length and breadth of the hall
+Suppose the breadth of the hall is \( x \) metres. Then, its length should be \( (2x + 1) \) metres. 
+We can depict this information pictorially as shown in Fig. 4.1. \\
+Now,
+\vspace{-2em}
+\begin{align*}
+\text{area of the hall} &= (2x + 1) \cdot x = (2x + 1)x \text{ m}^2 \\
+\Rightarrow 2x^2 + x &= 300 \quad \text{(Given)} \\
+\Rightarrow 2x^2 + x - 300 &= 0
+\end{align*}
+
+So, the breadth of the hall should satisfy the equation $2x^2 + x - 300 = 0$ which is a quadratic equation.
+
+Many people believe that Babylonians were the first to solve quadratic equations. For instance, they knew how to find two positive numbers with a given positive sum and a given positive product, and this problem is equivalent to solving a quadratic equation of the form $x^2 - px + q = 0$. Greek mathematician Euclid developed a geometrical approach for finding out lengths which, in our present day terminology, are solutions of quadratic equations. Solving of quadratic equations, in general form, is often credited to ancient Indian mathematicians. In fact, Brahmagupta (C.E. 598–665) gave an explicit formula to solve a quadratic equation of the form $ax^2 + bx = c$.
+\newpage
+\definecolor{cyanblue}{RGB}{0,153,204}
+
+% Section styling
+\titleformat{\section}{\color{cyanblue}\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}[runin]{\color{cyanblue}\bfseries}{\thesubsection}{1em}{}[.]
+
+
+\begin{document}
+\vspace*{0.4cm}
+{\color{cyanblue}\text{\text{Quadratic Equations}}\hspace{26em}{\color{cyanblue}\text{39}}}\\[-0.6em]
+{\color{cyanblue}\rule{\textwidth}{3pt}}
+\noindent
+\smallskip
+Sridharacharya (C.E. 1025) derived a formula, now known as the quadratic formula,(as quoted by Bhaskara II) for solving a quadratic equation by the method of completing the square. An Arab mathematician Al-Khwarizmi (about C.E. 800) also studied quadratic equations of different types. Abraham bar Hiyya Ha-Nasi, in his book‘Libre embadorum’ published in Europe in C.E. 1145 gave complete solutions of\\ different quadratic equations.
+
+\hspace{3em}In this chapter, you will study quadratic equations, and various ways of finding\\ their roots. You will also see some applications of quadratic equations in daily life\\ situations.\\\\
+{\color{cyanblue}\bfseries 4.2 \quad Quadratic Equations}\\
+\smallskip
+A quadratic equation in the variable $x$ is an equation of the form $ax^2 + bx + c = 0$, where $a, b, c$ are real numbers, $a \ne 0$. For example, $2x^2 + x - 300 = 0$ is a quadratic equation. Similarly, $2x^2 - 3x + 1 = 0$, $4x - 3x^2 + 2 = 0$ and $1 - x^2 + 300 = 0$ are also quadratic equations.
+
+\hspace{3em}In fact, any equation of the form $p(x) = 0$, where $p(x)$ is a polynomial of degree 2, is a quadratic equation. But when we write the terms of $p(x)$ in descending order of their degrees, then we get the standard form of the equation. That is, $ax^2 + bx + c = 0$, $a \ne 0$ is called the \textbf{standard form of a quadratic equation}.
+
+Quadratic equations arise in several situations in the world around us and in different fields of mathematics. Let us consider a few examples.
+\textbf{\color{cyanblue}Example 1:} Represent the following situations mathematically:
+\vspace{-1em}
+\begin{enumerate}[label=(\roman*), leftmargin=0.7cm] 
+\item John and Jivanti together have 45 marbles. Both of them lost 5 marbles each, and the product of the number of marbles they now have is 124. We would like to find out how many marbles they had to start with.
+
+\item A cottage industry produces a certain number of toys in a day. The cost of production of each toy (in rupees) was found to be 55 minus the number of toys produced in a day. On a particular day, the total cost of production was ₹750. We would like to find out the number of toys produced on that day.
+\end{enumerate}
+\vspace{-1em}
+\textbf{\color{cyanblue}Solution:}
+\begin{enumerate}[label=(\roman*), leftmargin=0.8cm]
+\vspace{-1em}
+\item Let the number of marbles John had be $x$.\\
+Then the number of marbles Jivanti had = $45 - x$ (Why?).\\
+The number of marbles left with John, when he lost 5 marbles = $x - 5$\\
+The number of marbles left with Jivanti, when she lost 5 marbles = $45 - x - 5$\\
+\hspace*{11cm}$= 40 - x$
+\end{enumerate}
+
+\end{document}
