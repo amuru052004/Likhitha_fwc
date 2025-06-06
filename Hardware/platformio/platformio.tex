@@ -1,0 +1,86 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{datetime2}
+\usepackage{pgfplots}
+\definecolor{darkskyblue}{rgb}{0.0, 0.5, 1.0}
+\definecolor{skyblue}{RGB}{135, 206, 235}
+\usepackage{wrapfig}
+\usepackage{circuitikz}
+
+\geometry{a4paper, top=0.7in, left=1in, right=1in, bottom=1in}
+
+\begin{document}
+
+\pagestyle{empty} % Start with empty page style
+
+\thispagestyle{fancy} % Apply fancy style only to the first page
+\fancyhf{} % Clear header and footer
+\renewcommand{\headrulewidth}{0pt} % Remove header rule
+
+\fancyhead[L]{% Left header
+	\includegraphics[width=8cm, height=1.7cm]{i.png} % Adjust dimensions
+}
+\fancyhead[R]{% Right header
+    Name: Amuru Likhitha\\
+    Batch: COMETFWC019 \\
+    Date: 27 May 2025 
+}
+
+\vspace{10cm}
+\begin{center}
+   
+    {\LARGE \textbf{\textcolor{darkskyblue}{\\  GATE QUESTION \\ ECE 2009 Q37}}}
+\end{center}
+\vspace{-1cm} %adjust vertical space
+
+\section*{\textcolor{blue}{\\Question}}
+Q37) What are the minimum number of 2-to-1 multiplexers required to generate a 2-input AND gate and a 2-input Ex-OR gate?\\
+
+\hspace{-0.5cm}\textbf{Options:}
+\begin{enumerate}
+ \item[(A)] 1 and 2
+    \item[(B)] 1 and 3
+    \item[(C)] 1 and 1
+    \item[(D)] 2 and 2
+\end{enumerate}
+\vspace{1cm}
+\section*{\textcolor{blue}{Answer and Explanation}}
+
+\textbf{Answer:} (c) 1 and 1
+\vspace{0.5cm}
+
+\textbf{Explanation:}
+
+\begin{itemize}
+    \item \textbf{2-input AND gate:} \\
+\vspace{0.5em}
+
+    A 2-input AND gate can be implemented using a single 2-to-1 multiplexer. Use one input (say $A$) as the select line, connect $I_0 = 0$, and $I_1 = B$. The output is:
+    \[
+    Y = A' \cdot 0 + A \cdot B = A \cdot B
+    \]
+    Hence, only \textbf{1 multiplexer} is required.
+\vspace{0.5em}
+    \item \textbf{2-input XOR gate:} \\
+\vspace{0.5em}\\
+    To implement XOR using 2-to-1 multiplexers, consider:
+    \[
+    Y = A' \cdot B + A \cdot B'
+    \]
+ In typical GATE (and similar competitive exam) questions involving MUX implementations, it's generally assumed that both the true form  and complemented form  of input variables are available or can be generated without counting extra basic gates (unless explicitly asked to derive everything solely from MUXes).
+    \begin{itemize}
+      
+        \item One MUX to implement the XOR function with inputs $B$ and $B'$
+    \end{itemize}
+    Total = \textbf{1 multiplexers}.
+\end{itemize}\\
+Thus, the minimum number of 2-to-1 multiplexers required for AND and XOR gates are {1 and 1}, respectively.
+\end{document}
