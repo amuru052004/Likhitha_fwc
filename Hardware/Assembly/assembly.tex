@@ -1,0 +1,96 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{amsmath, amssymb}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{datetime2}
+\usepackage{pgfplots}
+\definecolor{darkskyblue}{rgb}{0.0, 0.5, 1.0}
+\definecolor{skyblue}{RGB}{135, 206, 235}
+\usepackage{wrapfig}
+\usepackage{circuitikz}
+\geometry{margin=1in}
+
+\begin{document}
+\pagestyle{empty} % Start with empty page style
+
+\thispagestyle{fancy} % Apply fancy style only to the first page
+\fancyhf{} % Clear header and footer
+\renewcommand{\headrulewidth}{0pt} % Remove header rule
+
+\fancyhead[L]{% Left header
+	\includegraphics[width=8cm, height=1.7cm]{i.png} % Adjust dimensions
+}
+\fancyhead[R]{% Right header
+    Name: Amuru Likhitha\\
+    Batch: COMETFWC019 \\
+    Date: 03 june 2025 
+}
+\vspace{10cm}
+\begin{center}
+   
+    {\LARGE \textbf{\textcolor{darkskyblue}{\\  GATE QUESTION \\ ECE 2009 Q37}}}
+\end{center}
+\vspace{-1cm} %adjust vertical space
+\vspace{1em}
+\noindent
+{\color{violet}\textbf{Question}}
+
+\vspace{0.5em}
+\noindent
+Refer to the NAND and NOR latches shown in the figure below.
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{gate5.png} % Latch diagram
+\end{center}
+
+\vspace{0.5em}
+\noindent
+The inputs \((P_1, P_2)\) for both the latches are first made \((0,1)\), and then, after a few seconds, made \((1,1)\). The corresponding stable outputs \((Q_1, Q_2)\) are:
+
+\vspace{0.5em}
+\noindent
+\textbf{Options:}
+\begin{itemize}
+    \item[(A)] NAND: first \((0,1)\) then \((0,1)\); \quad NOR: first \((1,0)\) then \((0,0)\)
+    \item[(B)] NAND: first \((1,0)\) then \((1,0)\); \quad NOR: first \((1,0)\) then \((1,0)\)
+    \item[(C)] NAND: first \((1,0)\) then \((1,0)\); \quad NOR: first \((1,0)\) then \((0,0)\)
+    \item[(D)] NAND: first \((1,0)\) then \((1,1)\); \quad NOR: first \((0,1)\) then \((0,1)\)
+\end{itemize}
+
+\vspace{1em}
+\noindent
+{\color{violet}\textbf{Answer and Explanation}}
+
+\vspace{0.5em}
+{\color{!50!black}\textbf{Answer: (C)}}
+
+\vspace{0.5em}
+\textbf{NAND Latch:}
+\begin{itemize}
+    \item With inputs \((0,1)\): the latch stabilizes to \((Q_1, Q_2) = (1,0)\)
+    \item With inputs \((1,1)\): it remains at \((1,0)\)
+\end{itemize}
+
+\textbf{NOR Latch:}
+\begin{itemize}
+    \item With inputs \((0,1)\): the latch stabilizes to \((Q_1, Q_2) = (1,0)\)
+    \item With inputs \((1,1)\): it transitions to \((0,0)\)
+\end{itemize}
+
+\textbf{Final outputs:}
+\begin{itemize}
+    \item NAND Latch: \((1,0) \rightarrow (1,0)\)
+    \item NOR Latch: \((1,0) \rightarrow (0,0)\)
+\end{itemize}
+
+\end{document}
+
+
