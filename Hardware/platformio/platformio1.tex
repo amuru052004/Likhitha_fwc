@@ -1,0 +1,167 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{courier}
+
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  backgroundcolor=\color{gray!10},
+  frame=single,
+  breaklines=true,
+  captionpos=b
+}
+
+\setlength{\columnsep}{1cm} % spacing between columns
+
+\begin{document}
+
+% Title Block
+\begin{figure}[H]
+    \begin{minipage}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{i.png} % <-- Your hardware image
+    \end{minipage} \hfill
+    \begin{minipage}{0.45\textwidth}
+        \textbf{Name: Amuru Likhitha} \\
+        \textbf{Batch: COMETFWC019} \\
+        \textbf{Date: 6th July 2025}
+    \end{minipage}
+\end{figure}
+
+\begin{center}
+    {\LARGE \textbf{\textcolor{cyan}{GATE 2009, ECE Question Number 37}}}
+\end{center}
+\vspace{1em}
+
+% Begin columns
+\begin{multicols}{2}
+
+% Abstract
+\noindent\textbf{Abstract} \\[0.5em]
+\textit{(GATE 2009, Question No. 37 – Minimum number of 2-to-1 MUXes to implement AND and XOR gates)} \\[0.5em]
+This project demonstrates the logic implementation of a 2-input AND gate and a 2-input XOR gate using MicroPython and Raspberry Pi Pico.
+
+\vspace{1em}
+\noindent\textbf{1. Components}
+\begin{table}[H]
+\small
+\centering
+\begin{tabular}{|p{4.2cm}|c|}
+\hline
+\textbf{Component} & \textbf{Qty} \\
+\hline
+Raspberry Pi Pico & 1 \\
+USB Cable (Micro-USB) & 1 \\
+Push Buttons & 2 \\
+LEDs & 2 \\
+220$\Omega$ Resistors & 4 \\
+Jumper Wires (M-M) & 10 \\
+Breadboard & 1 \\
+Laptop with Thonny IDE & 1 \\
+\hline
+\end{tabular}
+\caption*{Table 1: List of components used}
+\end{table}
+
+\vspace{1em}
+\noindent\textbf{2. Setup and Connections}
+\begin{enumerate}
+    \item Connect push buttons to GPIO pins GP14 and GP15.
+    \item Attach LEDs to GP16 (AND output) and GP17 (XOR output) via 220$\Omega$ resistors.
+    \item Use pull-down configuration for button inputs.
+    \item Connect all grounds to Pico GND.
+    \item Power and program the Pico using Thonny IDE.
+\end{enumerate}
+
+\vspace{1em}
+\noindent\textbf{3. Implementation Steps}
+\begin{enumerate}
+    \item Assemble the circuit on the breadboard.
+    \item Connect Pico to PC and open Thonny.
+    \item Write and upload MicroPython code.
+    \item Press buttons and observe LED behavior.
+\end{enumerate}
+
+\vspace{1em}
+\noindent\textbf{4. Truth Table}
+\[
+\begin{array}{|c|c|c|c|}
+\hline
+A & B & A \cdot B & A \oplus B \\
+\hline
+0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 1 \\
+1 & 0 & 0 & 1 \\
+1 & 1 & 1 & 0 \\
+\hline
+\end{array}
+\]
+
+\vspace{1em}
+\noindent\textbf{5. Boolean Expressions}
+\begin{itemize}
+    \item AND Gate: \( F_{AND} = A \cdot B \)
+    \item XOR Gate: \( F_{XOR} = A \cdot \overline{B} + \overline{A} \cdot B \)
+\end{itemize}
+
+\end{multicols}
+
+\vspace{3em}
+\noindent\textbf{6. Input and Output Pins}
+\begin{itemize}
+    \item \textbf{A (Input)} – GP14
+    \item \textbf{B (Input)} – GP15
+    \item \textbf{AND Output LED} – GP16
+    \item \textbf{XOR Output LED} – GP17
+\end{itemize}
+
+\vspace{1em}
+\noindent\textbf{7. Circuit Screenshot} \\
+\\
+\includegraphics[width=0.5\textwidth]{platformio (1).jpeg} % <-- Replace with your real circuit image filename
+
+\vspace{1em}
+\noindent\textbf{8. Hardware Code – MicroPython (Thonny IDE)}
+\begin{lstlisting}[language=Python]
+from machine import Pin
+import utime
+
+# Define input pins
+A = Pin(14, Pin.IN, Pin.PULL_DOWN)
+B = Pin(15, Pin.IN, Pin.PULL_DOWN)
+
+# Define output pins
+and_led = Pin(16, Pin.OUT)
+xor_led = Pin(17, Pin.OUT)
+
+while True:
+    a_val = A.value()
+    b_val = B.value()
+
+    # AND gate
+    and_output = a_val and b_val
+    and_led.value(and_output)
+
+    # XOR gate
+    xor_output = (a_val and not b_val) or (not a_val and b_val)
+    xor_led.value(xor_output)
+
+    print("A =", a_val, "B =", b_val, 
+          "AND =", and_output, "XOR =", xor_output)
+
+    utime.sleep(0.1)
+\end{lstlisting}
+
+\vspace{1em}
+\noindent\textbf{9. GitHub Code Link} \\
+\url{https://github.com/amuru052004/Likhitha_fwc/tree/main/Hardware/platformio}
+
+\end{document}
