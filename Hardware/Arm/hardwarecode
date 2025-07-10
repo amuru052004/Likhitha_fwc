@@ -1,0 +1,35 @@
+int P1 = 2;
+int P2 = 3;
+int b = 4;
+int c = 5;
+
+int g_led = 8;
+int e_led = 9;
+int d_led = 10;
+
+void setup() {
+  pinMode(P1, INPUT);
+  pinMode(P2, INPUT);
+  pinMode(b, INPUT);
+  pinMode(c, INPUT);
+  pinMode(g_led, OUTPUT);
+  pinMode(e_led, OUTPUT);
+  pinMode(d_led, OUTPUT);
+}
+
+void loop() {
+  int val_P1 = digitalRead(P1);
+  int val_P2 = digitalRead(P2);
+  int val_b = digitalRead(b);
+  int val_c = digitalRead(c);
+
+  int g = (!val_P1) || (!val_P2);
+  int e = val_b || val_c;
+  int d = val_c || e;
+
+  digitalWrite(g_led, g);
+  digitalWrite(e_led, e);
+  digitalWrite(d_led, d);
+
+  delay(100);
+}
