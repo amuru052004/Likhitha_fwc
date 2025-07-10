@@ -1,0 +1,227 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{courier}
+
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  backgroundcolor=\color{gray!10},
+  frame=single,
+  breaklines=true,
+  captionpos=b
+}
+
+\setlength{\columnsep}{1cm}
+
+\begin{document}
+
+% Title Block
+\begin{figure}[H]
+    \begin{minipage}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{i.png} % Replace with your image
+    \end{minipage} \hfill
+    \begin{minipage}{0.45\textwidth}
+        \textbf{Name: Amuru Likhitha} \\
+        \textbf{Batch: COMETFWC019} \\
+        \textbf{Date: 10 July 2025}
+    \end{minipage}
+\end{figure}
+
+\begin{center}
+    {\LARGE \textbf{\textcolor{cyan}{GATE 2009, ECE Question Number 59}}}
+\end{center}
+\vspace{1em}
+
+\begin{multicols}{2}
+
+\noindent\textbf{Abstract} \\[0.5em]
+This project uses an Arduino UNO and a 7-segment display to simulate a vending machine logic system from GATE 2009 Question 59. Based on two inputs (P1, P2), prices are displayed: 0, 2, 5, or E.
+
+\vspace{1em}
+\noindent\textbf{1. Components}
+\begin{table}[H]
+\small
+\centering
+\begin{tabular}{|p{4.2cm}|c|}
+\hline
+\textbf{Component} & \textbf{Qty} \\
+\hline
+Arduino UNO & 1 \\
+Push Buttons (P1, P2) & 2 \\
+7-Segment Display (Common Cathode) & 1 \\
+220$\Omega$ Resistors & 7 \\
+Breadboard & 1 \\
+Jumper Wires & 12 \\
+Laptop with Arduino IDE & 1 \\
+\hline
+\end{tabular}
+\caption*{Table 1: List of components used}
+\end{table}
+
+\vspace{1em}
+\noindent\textbf{2. Setup and Connections}
+\begin{itemize}
+    \item Connect push button P1 to D2 and P2 to D3 with pull-down resistors.
+    \item Connect 7-segment display segments:
+    \begin{itemize}
+        \item a → D4, b → D5, c → D6, d → D7, e → D8, f → D9, g → D10
+    \end{itemize}
+    \item Connect each segment pin through a 220$\Omega$ resistor.
+    \item Common cathode pin of display to GND.
+    \item Arduino GND connected to breadboard GND.
+\end{itemize}
+
+\vspace{1em}
+\noindent\textbf{3. Logic Summary}
+\begin{itemize}
+    \item Inputs: P1, P2 (1 = pressed, 0 = not pressed)
+    \item Segment g: $g = P1 + P2$
+    \item Segment e: $e = b + c$
+    \item Segment d: $d = c + e$
+    \item Display outputs: 0, 2, 5, or E depending on input
+\end{itemize}
+
+\vspace{1em}
+\noindent\textbf{4. Pin Mapping}
+\begin{itemize}
+    \item \textbf{P1} – D2 (Input)
+    \item \textbf{P2} – D3 (Input)
+    \item \textbf{7-Segment Display:}
+    \begin{itemize}
+        \item a – D4, b – D5, c – D6, d – D7
+        \item e – D8, f – D9, g – D10
+    \end{itemize}
+\end{itemize}
+
+\vspace{1em}
+\noindent\textbf{5. Circuit Diagram} \\
+\includegraphics[width=0.85\linewidth]{z.png} % Replace with your circuit image
+
+\end{multicols}
+
+\newpage
+\section*{6. Hardware Code – Arduino (C++)}
+\begin{lstlisting}[language=C++]
+int P1 = 2;
+int P2 = 3;
+
+int seg_a = 4;
+int seg_b = 5;
+int seg_c = 6;
+int seg_d = 7;
+int seg_e = 8;
+int seg_f = 9;
+int seg_g = 10;
+
+void setup() {
+  pinMode(P1, INPUT);
+  pinMode(P2, INPUT);
+
+  pinMode(seg_a, OUTPUT);
+  pinMode(seg_b, OUTPUT);
+  pinMode(seg_c, OUTPUT);
+  pinMode(seg_d, OUTPUT);
+  pinMode(seg_e, OUTPUT);
+  pinMode(seg_f, OUTPUT);
+  pinMode(seg_g, OUTPUT);
+}
+
+void loop() {
+  int val_P1 = digitalRead(P1);
+  int val_P2 = digitalRead(P2);
+
+  if(val_P1 == 0 && val_P2 == 0) { // Display '0'
+    digitalWrite(seg_a, 1);
+    digitalWrite(seg_b, 1);
+    digitalWrite(seg_c, 1);
+    digitalWrite(seg_d, 1);
+    digitalWrite(seg_e, 1);
+    digitalWrite(seg_f, 1);
+    digitalWrite(seg_g, 0);
+  }
+  else if(val_P1 == 1 && val_P2 == 0) { // Display '2'
+    digitalWrite(seg_a, 1);
+    digitalWrite(seg_b, 1);
+    digitalWrite(seg_c, 0);
+    digitalWrite(seg_d, 1);
+    digitalWrite(seg_e, 1);
+    digitalWrite(seg_f, 0);
+    digitalWrite(seg_g, 1);
+  }
+  else if(val_P1 == 0 && val_P2 == 1) { // Display '5'
+    digitalWrite(seg_a, 1);
+    digitalWrite(seg_b, 0);
+    digitalWrite(seg_c, 1);
+    digitalWrite(seg_d, 1);
+    digitalWrite(seg_e, 0);
+    digitalWrite(seg_f, 1);
+    digitalWrite(seg_g, 1);
+  }
+  else { // Display 'E'
+    digitalWrite(seg_a, 1);
+    digitalWrite(seg_b, 0);
+    digitalWrite(seg_c, 0);
+    digitalWrite(seg_d, 1);
+    digitalWrite(seg_e, 1);
+    digitalWrite(seg_f, 1);
+    digitalWrite(seg_g, 1);
+  }
+
+  delay(100);
+}
+\end{lstlisting}
+
+\vspace{1em}
+\section*{7. Analysis}
+\subsection*{7.1 Truth Table}
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{P1} & \textbf{P2} & \textbf{Display} \\
+\hline
+0 & 0 & 0 \\
+1 & 0 & 2 \\
+0 & 1 & 5 \\
+1 & 1 & E \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection*{7.2 Segment Activation}
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Digit} & a & b & c & d & e & f & g \\
+\hline
+0 & 1 & 1 & 1 & 1 & 1 & 1 & 0 \\
+2 & 1 & 1 & 0 & 1 & 1 & 0 & 1 \\
+5 & 1 & 0 & 1 & 1 & 0 & 1 & 1 \\
+E & 1 & 0 & 0 & 1 & 1 & 1 & 1 \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection*{7.3 Derivations}
+\begin{itemize}
+    \item $g = P1 + P2$
+    \item $e = b + c$
+    \item $d = c + e$
+\end{itemize}
+
+\vspace{1em}
+\section*{8. Conclusion}
+This hardware implementation using a 7-segment display successfully models vending machine logic using basic input and output pins of Arduino UNO. The results are validated against GATE 2009 Question 59 output specifications.
+
+\end{document}
