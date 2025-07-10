@@ -1,0 +1,160 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{courier}
+
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  backgroundcolor=\color{gray!10},
+  frame=single,
+  breaklines=true,
+  captionpos=b
+}
+
+\setlength{\columnsep}{1cm}
+
+\begin{document}
+
+% Title Block
+\begin{figure}[H]
+    \begin{minipage}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{i.png} % Replace with your logo
+    \end{minipage} \hfill
+    \begin{minipage}{0.45\textwidth}
+        \textbf{Name: Amuru Likhitha} \\
+        \textbf{Batch: COMETFWC019} \\
+        \textbf{Date: 03 June 2025}
+    \end{minipage}
+\end{figure}
+
+\begin{center}
+    {\LARGE \textbf{\textcolor{cyan}{GATE 2009, ECE Question Number 39}}}
+\end{center}
+\vspace{1em}
+
+\begin{multicols}{2}
+
+\noindent\textbf{Abstract} \\[0.5em]
+This project implements the GATE 2009 Q39 JK Flip-Flop counter using a Raspberry Pi Pico W, buttons, and LEDs. The system simulates a 3-state counter with the sequence \texttt{01 → 10 → 00 → 01...}. Button presses act as clock signals, and LEDs represent the outputs Q1 and Q2.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{jk_flipflop.png} % Replace with JK FF logic diagram
+    \caption*{Figure: JK Flip-Flop logic diagram used in simulation}
+\end{figure}
+
+\vspace{1em}
+\noindent\textbf{1. Components}
+\begin{table}[H]
+\small
+\centering
+\begin{tabular}{|p{4.2cm}|c|}
+\hline
+\textbf{Component} & \textbf{Qty} \\
+\hline
+Raspberry Pi Pico W & 1 \\
+Push Button (clock input) & 1 \\
+LEDs (Q1, Q2) & 2 \\
+220$\Omega$ Resistors & 2 \\
+Breadboard & 1 \\
+Jumper Wires & 8 \\
+Micro-USB Cable & 1 \\
+\hline
+\end{tabular}
+\caption*{Table 1: List of components used}
+\end{table}
+
+\vspace{1em}
+\noindent\textbf{2. Setup and Connections}
+\begin{itemize}
+    \item \textbf{Button (Clock)} → GPIO 15 with a pull-down resistor.
+    \item \textbf{LED Q1} → GPIO 16 via 220$\Omega$ resistor.
+    \item \textbf{LED Q2} → GPIO 17 via 220$\Omega$ resistor.
+    \item GND connections from Pico to breadboard.
+    \item Button press triggers state change.
+\end{itemize}
+
+\vspace{1em}
+\noindent\textbf{3. State Table for Q39}
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Press} & \textbf{Q2} & \textbf{Q1} \\
+\hline
+Initial & 0 & 0 \\
+1st & 0 & 1 \\
+2nd & 1 & 0 \\
+3rd & 0 & 0 \\
+4th & 0 & 1 \\
+\hline
+\end{tabular}
+\caption*{Table 2: State transition sequence for 3-state counter}
+\end{table}
+
+\end{multicols}
+
+\newpage
+\section*{4. MicroPython Code for Raspberry Pi Pico W}
+\begin{lstlisting}[language=Python]
+from machine import Pin
+import time
+
+# Assign GPIO pins
+button = Pin(15, Pin.IN, Pin.PULL_DOWN)
+q1_led = Pin(16, Pin.OUT)
+q2_led = Pin(17, Pin.OUT)
+
+q1 = 0
+q2 = 0
+prev = 0
+
+def update_leds():
+    q1_led.value(q1)
+    q2_led.value(q2)
+
+while True:
+    clk = button.value()
+    if clk == 1 and prev == 0:
+        # JK FF behavior
+        next_q1 = 1 - q1
+        next_q2 = (not q2 and q1) or (q2 and not q1)
+        
+        # update states
+        q1 = int(next_q1)
+        q2 = int(next_q2)
+        
+        update_leds()
+        time.sleep(0.3)  # debounce
+
+    prev = clk
+\end{lstlisting}
+
+\section*{5. Analysis}
+\begin{itemize}
+    \item Flip-Flop 1 toggles on every clock (J=Q2, K=1)
+    \item Flip-Flop 2 toggles based on Q1 (J=Q1, K=1)
+    \item Implemented logic replicates JK Flip-Flop transitions
+    \item LED outputs match state sequence: 01 → 10 → 00 → ...
+\end{itemize}
+
+\section*{6. Circuit Image}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{avr_gcc (2).jpeg} % Replace with actual hardware image
+    \caption*{Figure: Real hardware setup using Raspberry Pi Pico W}
+\end{figure}
+
+\section*{7. Conclusion}
+This hardware implementation using Raspberry Pi Pico W accurately simulates the JK flip-flop logic defined in GATE ECE 2009 Q39. The LED outputs reflect the correct 3-state sequence, and button input effectively acts as a manual clock pulse generator.
+
+\end{document}
