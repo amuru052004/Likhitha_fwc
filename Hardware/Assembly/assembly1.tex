@@ -1,0 +1,176 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{courier}
+
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  backgroundcolor=\color{gray!10},
+  frame=single,
+  breaklines=true,
+  captionpos=b
+}
+
+\setlength{\columnsep}{1cm}
+
+\begin{document}
+
+% Title Block
+\begin{figure}[H]
+    \begin{minipage}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{i.png} % <-- Replace with your image filename
+    \end{minipage} \hfill
+    \begin{minipage}{0.45\textwidth}
+        \textbf{Name: Amuru Likhitha} \\
+        \textbf{Batch: COMETFWC019} \\
+        \textbf{Date: 06 July 2025}
+    \end{minipage}
+\end{figure}
+
+\begin{center}
+    {\LARGE \textbf{\textcolor{cyan}{GATE 2009, ECE Question Number 38}}}
+\end{center}
+\vspace{1em}
+
+\begin{multicols}{2}
+
+\noindent\textbf{Abstract} \\[0.5em]
+\textit{Simulation of latch behavior using Raspberry Pi Pico to demonstrate NAND and NOR latch transitions for the input combinations (0,1) → (1,1).}
+
+\vspace{1em}
+\noindent\textbf{1. Components}
+\begin{table}[H]
+\small
+\centering
+\begin{tabular}{|p{4.2cm}|c|}
+\hline
+\textbf{Component} & \textbf{Qty} \\
+\hline
+ Pico2w & 1 \\
+Push Buttons & 2 \\
+LEDs & 2 \\
+220$\Omega$ Resistors & 4 \\
+Breadboard & 1 \\
+Jumper Wires & 10 \\
+Laptop with Thonny IDE & 1 \\
+\hline
+\end{tabular}
+\caption*{Table: Components used}
+\end{table}
+
+\vspace{1em}
+\noindent\textbf{2. Setup}
+\begin{itemize}
+    \item GP15: Input P1 (Push Button)
+    \item GP14: Input P2 (Push Button)
+    \item GP16: NAND Q Output (LED)
+    \item GP17: NOR Q Output (LED)
+    \item GND and VBUS properly connected
+\end{itemize}
+
+\vspace{1em}
+\noindent\textbf{3. Observation}
+\begin{itemize}
+    \item \textbf{NAND Latch:} (0,1) → (1,0) → holds at (1,0)
+    \item \textbf{NOR Latch:} (0,1) → (1,0) → transitions to (0,0)
+\end{itemize}
+
+\end{multicols}
+\\
+\noindent\textbf{4. Truth Tables}\\
+\\
+\\
+\vspace{2em}
+\begin{minipage}{0.45\linewidth}
+\centering
+\textbf{NAND Latch} \\
+\[
+\begin{array}{|c|c|c|}
+\hline
+P1 & P2 & \text{Output (Q1, Q2)} \\
+\hline
+0 & 1 & (1, 0) \\
+1 & 1 & (1, 0) \text{ (holds)} \\
+\hline
+\end{array}
+\]
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\linewidth}
+\centering
+\textbf{NOR Latch} \\
+\[
+\begin{array}{|c|c|c|}
+\hline
+P1 & P2 & \text{Output (Q1, Q2)} \\
+\hline
+0 & 1 & (1, 0) \\
+1 & 1 & (0, 0) \\
+\hline
+\end{array}
+\]
+\end{minipage}
+
+\vspace{14em}
+\noindent\textbf{5. Circuit Image} \\
+\\
+\includegraphics[width=0.6\linewidth]{platformio (1).jpeg}
+
+\vspace{1em}
+\noindent\textbf{6. Hardware Code – MicroPython}
+\begin{lstlisting}[language=Python]
+from machine import Pin
+import utime
+
+P1 = Pin(15, Pin.IN, Pin.PULL_DOWN)
+P2 = Pin(14, Pin.IN, Pin.PULL_DOWN)
+
+nand_q = Pin(16, Pin.OUT)
+nor_q = Pin(17, Pin.OUT)
+
+nand_q_state = 1
+nor_q_state = 1
+
+while True:
+    p1 = P1.value()
+    p2 = P2.value()
+
+    if p1 == 0 and p2 == 1:
+        nand_q_state = 1
+    elif p1 == 1 and p2 == 1:
+        nand_q_state = nand_q_state
+
+    if p1 == 0 and p2 == 1:
+        nor_q_state = 1
+    elif p1 == 1 and p2 == 1:
+        nor_q_state = 0
+
+    nand_q.value(nand_q_state)
+    nor_q.value(nor_q_state)
+
+    print("P1 =", p1, "P2 =", p2, 
+          "NAND Q =", nand_q_state, 
+          "NOR Q =", nor_q_state)
+
+    utime.sleep(0.2)
+\end{lstlisting}
+
+\vspace{1em}
+\noindent\textbf{7. GitHub Code Link} \\
+\url{https://github.com/amuru052004/Likhitha_fwc/tree/main/Hardware/assembly}
+
+\vspace{1em}
+\noindent\textbf{8. Conclusion}
+
+This project successfully demonstrates latch behavior for NAND and NOR gates using MicroPython and Raspberry Pi Pico. 
+
+\end{document}
