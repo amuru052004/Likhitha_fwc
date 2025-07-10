@@ -125,51 +125,13 @@ P1 & P2 & \text{Output (Q1, Q2)} \\
 \\
 \includegraphics[width=0.6\linewidth]{platformio (1).jpeg}
 
-\vspace{1em}
-\noindent\textbf{6. Hardware Code – MicroPython}
-\begin{lstlisting}[language=Python]
-from machine import Pin
-import utime
-
-P1 = Pin(15, Pin.IN, Pin.PULL_DOWN)
-P2 = Pin(14, Pin.IN, Pin.PULL_DOWN)
-
-nand_q = Pin(16, Pin.OUT)
-nor_q = Pin(17, Pin.OUT)
-
-nand_q_state = 1
-nor_q_state = 1
-
-while True:
-    p1 = P1.value()
-    p2 = P2.value()
-
-    if p1 == 0 and p2 == 1:
-        nand_q_state = 1
-    elif p1 == 1 and p2 == 1:
-        nand_q_state = nand_q_state
-
-    if p1 == 0 and p2 == 1:
-        nor_q_state = 1
-    elif p1 == 1 and p2 == 1:
-        nor_q_state = 0
-
-    nand_q.value(nand_q_state)
-    nor_q.value(nor_q_state)
-
-    print("P1 =", p1, "P2 =", p2, 
-          "NAND Q =", nand_q_state, 
-          "NOR Q =", nor_q_state)
-
-    utime.sleep(0.2)
-\end{lstlisting}
 
 \vspace{1em}
-\noindent\textbf{7. GitHub Code Link} \\
+\noindent\textbf{6. GitHub Code Link} \\
 \url{https://github.com/amuru052004/Likhitha_fwc/tree/main/Hardware/assembly}
 
 \vspace{1em}
-\noindent\textbf{8. Conclusion}
+\noindent\textbf{7. Conclusion}
 
 This project successfully demonstrates latch behavior for NAND and NOR gates using MicroPython and Raspberry Pi Pico. 
 
