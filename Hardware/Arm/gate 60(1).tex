@@ -105,51 +105,13 @@ Laptop with Arduino IDE & 1 \\
 % Switch to single column for the rest
 \newpage
 
-\section*{6. Hardware Code – Arduino (C++)}
-\begin{lstlisting}[language=C++]
-int P1 = 2;
-int P2 = 3;
-int b = 4;
-int c = 5;
-
-int g_led = 8;
-int e_led = 9;
-int d_led = 10;
-
-void setup() {
-  pinMode(P1, INPUT);
-  pinMode(P2, INPUT);
-  pinMode(b, INPUT);
-  pinMode(c, INPUT);
-  pinMode(g_led, OUTPUT);
-  pinMode(e_led, OUTPUT);
-  pinMode(d_led, OUTPUT);
-}
-
-void loop() {
-  int val_P1 = digitalRead(P1);
-  int val_P2 = digitalRead(P2);
-  int val_b = digitalRead(b);
-  int val_c = digitalRead(c);
-
-  int g = (!val_P1) || (!val_P2);
-  int e = val_b || val_c;
-  int d = val_c || e;
-
-  digitalWrite(g_led, g);
-  digitalWrite(e_led, e);
-  digitalWrite(d_led, d);
-
-  delay(100);
-}
-\end{lstlisting}
 
 \vspace{1em}
-\section*{7. GitHub Code Link}
+\section*{6. GitHub Code Link}
 \url{https://github.com/amuru052004/Likhitha_fwc/tree/main/Hardware}
 
 \vspace{1em}
-\section*{8. Conclusion}
+\section*{7. Conclusion}
 This document provides the successful hardware implementation of GATE Q60 using Arduino and minimal gates. The outputs g, e, and d have been verified using the logic: 2 NOT gates and 3 OR gates, and the results matched expected behavior.
 
 \end{document}
