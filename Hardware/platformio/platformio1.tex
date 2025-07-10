@@ -129,39 +129,10 @@ A & B & A \cdot B & A \oplus B \\
 \includegraphics[width=0.5\textwidth]{platformio (1).jpeg} % <-- Replace with your real circuit image filename
 
 \vspace{1em}
-\noindent\textbf{8. Hardware Code – MicroPython (Thonny IDE)}
-\begin{lstlisting}[language=Python]
-from machine import Pin
-import utime
 
-# Define input pins
-A = Pin(14, Pin.IN, Pin.PULL_DOWN)
-B = Pin(15, Pin.IN, Pin.PULL_DOWN)
-
-# Define output pins
-and_led = Pin(16, Pin.OUT)
-xor_led = Pin(17, Pin.OUT)
-
-while True:
-    a_val = A.value()
-    b_val = B.value()
-
-    # AND gate
-    and_output = a_val and b_val
-    and_led.value(and_output)
-
-    # XOR gate
-    xor_output = (a_val and not b_val) or (not a_val and b_val)
-    xor_led.value(xor_output)
-
-    print("A =", a_val, "B =", b_val, 
-          "AND =", and_output, "XOR =", xor_output)
-
-    utime.sleep(0.1)
-\end{lstlisting}
 
 \vspace{1em}
-\noindent\textbf{9. GitHub Code Link} \\
+\noindent\textbf{8. GitHub Code Link} \\
 \url{https://github.com/amuru052004/Likhitha_fwc/tree/main/Hardware/platformio}
 
 \end{document}
