@@ -111,31 +111,11 @@ A & B & LED (Output) \\
 \\
 \includegraphics[width=0.6\linewidth]{output.jpeg} 
 
+
 \vspace{1em}
-\noindent\textbf{6. MicroPython Code (Thonny)}
-\begin{lstlisting}[language=Python]
-from machine import Pin
-from time import sleep
+\noindent\textbf{6. GitHub Code Link} \\
+\url{https://github.com/amuru052004/Likhitha_fwc/tree/main/Hardware/platformio}
 
-# Define pushbuttons
-button_a = Pin(14, Pin.IN, Pin.PULL_DOWN)
-button_b = Pin(15, Pin.IN, Pin.PULL_DOWN)
-
-# Define LED
-led = Pin(13, Pin.OUT)
-
-while True:
-    a = button_a.value()
-    b = button_b.value()
-
-    # NAND logic: output is off only if both inputs are high
-    if a == 1 and b == 1:
-        led.value(0)  # LED off
-    else:
-        led.value(1)  # LED on
-
-    sleep(0.1)
-\end{lstlisting}
 \vspace{1em}
 \noindent\textbf{7. Conclusion}
 
