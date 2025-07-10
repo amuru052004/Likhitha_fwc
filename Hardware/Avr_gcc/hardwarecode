@@ -1,0 +1,31 @@
+from machine import Pin
+import time
+
+# Assign GPIO pins
+button = Pin(15, Pin.IN, Pin.PULL_DOWN)
+q1_led = Pin(16, Pin.OUT)
+q2_led = Pin(17, Pin.OUT)
+
+q1 = 0
+q2 = 0
+prev = 0
+
+def update_leds():
+    q1_led.value(q1)
+    q2_led.value(q2)
+
+while True:
+    clk = button.value()
+    if clk == 1 and prev == 0:
+        # JK FF behavior
+        next_q1 = 1 - q1
+        next_q2 = (not q2 and q1) or (q2 and not q1)
+        
+        # update states
+        q1 = int(next_q1)
+        q2 = int(next_q2)
+        
+        update_leds()
+        time.sleep(0.3)  # debounce
+
+    prev = clk
